@@ -6,8 +6,8 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Facebook</title>
-        <link rel="icon" href="/facebookicon.svg" />
+        <title>MealPlanner</title>
+        <link rel="icon" href="/logo.png" />
       </Head>
       <>
         <div className="flex flex-col-reverse text-center lg:text-left lg:flex-row items-center m-auto">
@@ -31,7 +31,7 @@ export default function Home() {
             </div>
           </div>
           <div className="m-5">
-            <Image src="/home.png" width={1100} height={1100} />
+            <Image src="/home.png" width={800} height={800} />
           </div>
         </div>
       </>

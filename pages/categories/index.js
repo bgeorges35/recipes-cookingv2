@@ -19,7 +19,7 @@ const Categories = ({ categories }) => {
           setFilterType(value);
         }}
       />
-      <div className="grid grid-cols-2 gap-4 m-5 md:grid-cols-3">
+      <div className="grid grid-cols-2 gap-4 m-5 md:grid-cols-4">
         {filterType.display.categoryTopics.map((c, idx) => {
           return (
             <Link
@@ -37,7 +37,6 @@ const Categories = ({ categories }) => {
           );
         })}
       </div>
-      <Pagination count={10} size="large" className="" />
     </Paper>
   );
 };

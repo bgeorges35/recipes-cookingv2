@@ -10,7 +10,7 @@ const Grid = ({ img, name }) => {
           width={300}
           height={300}
           objectFit="cover"
-          // quality={100}
+          quality={100}
         />
         <p>{name}</p>
       </div>

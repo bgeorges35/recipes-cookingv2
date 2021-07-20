@@ -1,13 +1,19 @@
-import { useRouter } from "next/router";
+import { Router, useRouter } from "next/router";
 import Grid from "../../../components/Grid";
 import axios from "axios";
 import Link from "next/link";
 import LayoutGrid from "../../../components/LayoutGrid";
+import { useState, useCallback, useEffect } from "react";
 
 const Recipes = ({ recipes }) => {
   const router = useRouter();
-  if (router.isFallback || !recipes) {
-    return <div>Loading...</div>;
+
+  if (router.isFallback) {
+    return (
+      <LayoutGrid>
+        <div>Loading...</div>
+      </LayoutGrid>
+    );
   }
 
   const sendRecipe = () => {
@@ -44,7 +50,9 @@ export async function getStaticPaths() {
   params = arrURL.flatMap((url) => {
     let arr = [];
     for (let i = 1; i < 10; i++) {
-      arr = arr.concat({ params: { menu: url, page: i.toString() } });
+      arr = arr.concat({
+        params: { menu: encodeURIComponent(url), page: i.toString() },
+      });
     }
     return arr;
   });
@@ -72,8 +80,6 @@ export async function getStaticProps({ params }) {
   const { data } = await axios.request(options);
 
   const recipes = data.feed;
-
-  console.log("coucou");
 
   return {
     props: {

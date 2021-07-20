@@ -1,15 +1,29 @@
-import { useRouter } from "next/router";
+import { Router, useRouter } from "next/router";
 import { Paper } from "@material-ui/core";
 import Pagination from "@material-ui/lab/Pagination";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 const LayoutGrid = ({ children }) => {
   const router = useRouter();
   const [page, setPage] = useState(1);
 
-  // const changeHandler = (e, value) => {
-  //   setPage(value);
-  // };
+  const [loading, setLoading] = useState(true);
+
+  const handleStart = () => {
+    setLoading(true);
+  };
+  const handleComplete = () => {
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    Router.events.on("routeChangeStart", handleStart);
+    Router.events.on("routeChangeComplete", handleComplete);
+    return () => {
+      Router.events.off("routeChangeStart", handleStart);
+      Router.events.off("routeChangeComplete", handleComplete);
+    };
+  }, [Router]);
 
   useEffect(() => {
     router.push(page.toString());
@@ -17,14 +31,18 @@ const LayoutGrid = ({ children }) => {
 
   return (
     <Paper className="flex flex-col justify-center items-center">
-      <div className="grid grid-cols-2 gap-4 m-5 md:grid-cols-4">
-        {children}
-      </div>
+      {!loading ? (
+        <div className="grid grid-cols-2 gap-4 m-5 md:grid-cols-4">
+          {children}
+        </div>
+      ) : (
+        <div className="text-center text-lg m-5">loading...</div>
+      )}
       <Pagination
         page={page}
         count={10}
         size="large"
-        onChange={(e, v) => setPage(v)}
+        onChange={(_, v) => setPage(v)}
       />
     </Paper>
   );
