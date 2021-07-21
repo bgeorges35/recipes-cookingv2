@@ -28,9 +28,17 @@ const Recipes = ({ recipes }) => {
       <LayoutGrid>
         {recipes.map((c, idx) => (
           <a
-            onClick={() => c.content.preparationSteps && clickHandler(c)}
+            onClick={() =>
+              c.content.preparationSteps &&
+              c.content.preparationSteps.length &&
+              clickHandler(c)
+            }
             key={c.display.displayName + idx}
-            className={`${!c.content.preparationSteps && "opacity-50"} `}
+            className={`${
+              (!c.content.preparationSteps ||
+                !c.content.preparationSteps.length) &&
+              "opacity-50"
+            } `}
           >
             <Grid
               tag={c.display.displayName}
