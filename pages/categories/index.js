@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Selector from "../../components/Selector";
 import Grid from "../../components/Grid";
+import { Paper } from "@material-ui/core";
 
 import axios from "axios";
 
@@ -10,7 +11,7 @@ const Categories = ({ categories }) => {
   const [filterType, setFilterType] = useState(categories[0]);
 
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div className="flex flex-col">
       <Selector
         categories={categories}
         changeHandler={(value) => {
