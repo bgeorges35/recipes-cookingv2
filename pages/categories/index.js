@@ -11,7 +11,7 @@ const Categories = ({ categories }) => {
   const [filterType, setFilterType] = useState(categories[0]);
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col mt-3">
       <Selector
         categories={categories}
         changeHandler={(value) => {
