@@ -1,12 +1,14 @@
-import { Router, useRouter } from "next/router";
+import { useRouter } from "next/router";
 import Grid from "../../../components/Grid";
 import axios from "axios";
-import Link from "next/link";
 import LayoutGrid from "../../../components/LayoutGrid";
-import { useState, useCallback, useEffect } from "react";
+import { useState } from "react";
+import RecipeModal from "../../../components/RecipeModal";
 
 const Recipes = ({ recipes }) => {
   const router = useRouter();
+  const [recipe, setRecipe] = useState({});
+  const [showModal, setShowModal] = useState(false);
 
   if (router.isFallback) {
     return (
@@ -16,27 +18,34 @@ const Recipes = ({ recipes }) => {
     );
   }
 
-  const sendRecipe = () => {
-    console.log("coucou");
+  const clickHandler = (c = null) => {
+    setShowModal(!showModal);
+    setRecipe(c);
   };
 
   return (
-    <LayoutGrid>
-      {recipes.map((c, idx) => (
-        <Link
-          href={`/recipe/${encodeURIComponent(c.display.displayName)}`}
-          key={c.display.displayName + idx}
-        >
-          <a onClick={sendRecipe}>
+    <>
+      <LayoutGrid>
+        {recipes.map((c, idx) => (
+          <a
+            onClick={() => c.content.preparationSteps && clickHandler(c)}
+            key={c.display.displayName + idx}
+            className={`${!c.content.preparationSteps && "opacity-50"} `}
+          >
             <Grid
               tag={c.display.displayName}
               img={c.display.images[0]}
               name={c.display.displayName}
             />
           </a>
-        </Link>
-      ))}
-    </LayoutGrid>
+        ))}
+      </LayoutGrid>
+      <RecipeModal
+        open={showModal}
+        data={recipe}
+        modalHandler={() => clickHandler()}
+      />
+    </>
   );
 };
 
@@ -85,6 +94,5 @@ export async function getStaticProps({ params }) {
     props: {
       recipes,
     },
-    // revalidate: 1,
   };
 }

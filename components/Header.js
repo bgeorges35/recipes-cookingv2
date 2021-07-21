@@ -2,8 +2,6 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { AiOutlineSearch } from "react-icons/ai";
-
 const Header = () => {
   return (
     <div className="flex mt-1 justify-evenly items-center">
@@ -15,12 +13,6 @@ const Header = () => {
           height={90}
         />
       </Link>
-      <div className="border flex items-center bg-white rounded-xl p-1">
-        <label>
-          <AiOutlineSearch />
-        </label>
-        <input className="outline-none" placeholder="Search here..."></input>
-      </div>
     </div>
   );
 };

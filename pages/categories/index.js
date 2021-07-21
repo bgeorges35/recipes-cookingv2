@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Selector from "../../components/Selector";
 import Grid from "../../components/Grid";
 import { Paper } from "@material-ui/core";
-import Pagination from "@material-ui/lab/Pagination";
 
 import axios from "axios";
 

@@ -1,7 +1,7 @@
 import { Router, useRouter } from "next/router";
-import { Paper } from "@material-ui/core";
 import Pagination from "@material-ui/lab/Pagination";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const LayoutGrid = ({ children }) => {
   const router = useRouter();
@@ -30,13 +30,13 @@ const LayoutGrid = ({ children }) => {
   }, [page]);
 
   return (
-    <Paper className="flex flex-col justify-center items-center">
+    <div className="flex flex-col justify-start items-center ">
       {!loading ? (
         <div className="grid grid-cols-2 gap-4 m-5 md:grid-cols-4">
           {children}
         </div>
       ) : (
-        <div className="text-center text-lg m-5">loading...</div>
+        <CircularProgress size={40} className="m-3" />
       )}
       <Pagination
         page={page}
@@ -44,7 +44,7 @@ const LayoutGrid = ({ children }) => {
         size="large"
         onChange={(_, v) => setPage(v)}
       />
-    </Paper>
+    </div>
   );
 };
 

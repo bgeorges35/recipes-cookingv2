@@ -19,12 +19,9 @@ export default function Home() {
               Want to learn cook but confused how to start ?
             </p>
             <p className="text-xs lg:text-2xl my-1">No need to worry again</p>
-            <div className="flex justify-center items-center text-white my-6 lg:text-2xl">
-              <Link href="/toto">
-                <a className="bg-green-400 rounded-3xl p-2 mx-4">Get Started</a>
-              </Link>
+            <div className="flex flex-col justify-center min-w-full  text-white my-6 lg:text-2xl">
               <Link href="/categories">
-                <a className="bg-green-400 rounded-3xl p-2 mx-4">
+                <a className="bg-green-400 rounded-3xl p-2 mx-4 text-center">
                   Explore Menu
                 </a>
               </Link>
