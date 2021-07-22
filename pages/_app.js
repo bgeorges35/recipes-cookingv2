@@ -1,17 +1,14 @@
 import "../styles/globals.css";
 import Header from "../components/Header";
-
-// import { ApolloProvider } from "@apollo/client";
-// import client from "../apollo-client";
+import Footer from "../components/Footer";
 
 function MyApp({ Component, pageProps }) {
   return (
-    // <ApolloProvider client={client}>
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full justify-between">
       <Header />
       <Component {...pageProps} />
+      <Footer />
     </div>
-    // </ApolloProvider>
   );
 }
 
